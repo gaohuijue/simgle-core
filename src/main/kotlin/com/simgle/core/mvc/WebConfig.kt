@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @Configuration
 @EnableWebMvc
 @Order(Ordered.HIGHEST_PRECEDENCE)
-class WebConfig : WebMvcConfigurer {
+open class WebConfig : WebMvcConfigurer {
     override fun addInterceptors(registry: InterceptorRegistry) {
         registry.addInterceptor(ThreadBindingInterceptor())
     }

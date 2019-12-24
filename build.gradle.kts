@@ -1,10 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.2.2.RELEASE"
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
     kotlin("jvm") version "1.3.61"
-    kotlin("plugin.spring") version "1.3.61"
+    `maven-publish`
 }
 
 group = "com.simgle"
@@ -14,14 +13,15 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 repositories {
     maven("http://maven.aliyun.com/nexus/content/groups/public/")
     maven("http://maven.aliyun.com/nexus/content/repositories/jcenter")
+    mavenLocal()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+    api("org.springframework.boot:spring-boot-starter-web:2.2.2.RELEASE")
+    api("org.jetbrains.kotlin:kotlin-reflect")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:+")
+    api("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.2.2.RELEASE") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
 }
@@ -34,5 +34,16 @@ tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "1.8"
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
+    repositories {
+
     }
 }

@@ -19,7 +19,7 @@ repositories {
 dependencies {
     api("org.springframework.boot:spring-boot-starter-web:2.2.2.RELEASE")
     api("org.jetbrains.kotlin:kotlin-reflect")
-    api("com.fasterxml.jackson.module:jackson-module-kotlin:+")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
     api("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.2.2.RELEASE") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
@@ -40,6 +40,10 @@ tasks.withType<KotlinCompile> {
 tasks.create("sourceJar", Jar::class.java) {
     this.archiveClassifier.set("sources")
     this.from(sourceSets.main.get().allSource)
+}
+
+tasks.javadoc {
+    this.options.encoding = "UTF-8"
 }
 
 publishing {

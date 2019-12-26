@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class ThreadBindingInterceptor : HandlerInterceptor {
+    // 设置通用线程绑定变量。
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val session = request.session ?: return true
 
@@ -22,6 +23,6 @@ class ThreadBindingInterceptor : HandlerInterceptor {
     }
 
     override fun afterCompletion(request: HttpServletRequest, response: HttpServletResponse, handler: Any, ex: Exception?) {
-        ThreadBinds.destroy()
+        ThreadBinds.destroyThreadBind()
     }
 }

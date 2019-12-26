@@ -22,7 +22,7 @@ object ThreadBinds {
         threadLocal.get().remove(k)
     }
 
-    fun destroy() {
+    fun destroyThreadBind() {
         threadLocal.remove()
     }
 }

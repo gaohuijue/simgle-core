@@ -11,13 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @EnableWebMvc
 @Order(Ordered.HIGHEST_PRECEDENCE)
 open class ThreadBindingWebMvcConfig(
-        private val rbacInterceptor: RbacInterceptor?
+        private val abstractRbacInterceptor: AbstractRbacInterceptor?
 ) : WebMvcConfigurer {
     override fun addInterceptors(registry: InterceptorRegistry) {
         registry.addInterceptor(ThreadBindingInterceptor())
 
-        if (rbacInterceptor != null) {
-            registry.addInterceptor(rbacInterceptor)
+        if (abstractRbacInterceptor != null) {
+            registry.addInterceptor(abstractRbacInterceptor)
         }
     }
 }

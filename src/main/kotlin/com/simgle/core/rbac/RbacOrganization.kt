@@ -6,5 +6,4 @@ package com.simgle.core.rbac
  */
 interface RbacOrganization {
     fun getId(): String
-    fun getParent(): RbacOrganization?
 }

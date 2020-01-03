@@ -6,11 +6,15 @@ object ThreadBinds {
     private val threadLocal = ThreadLocal<ConcurrentHashMap<String, Any?>>()
 
     fun put(k: String, v: Any) {
-        val map = threadLocal.get()
+        var map = threadLocal.get()
         if (map == null) {
             threadLocal.set(ConcurrentHashMap())
         }
-        threadLocal.get()[k] = v
+
+        map = threadLocal.get()
+        if (map != null) {
+            map[k] = v
+        }
     }
 
     fun get(k: String): Any? {
@@ -19,7 +23,7 @@ object ThreadBinds {
     }
 
     fun remove(k: String) {
-        threadLocal.get().remove(k)
+        threadLocal.get()?.remove(k)
     }
 
     fun destroyThreadBind() {

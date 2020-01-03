@@ -10,11 +10,18 @@ import javax.servlet.http.HttpServletResponse
 class ThreadBindingInterceptor : HandlerInterceptor {
     // 设置通用线程绑定变量。
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val session = request.session ?: return true
+        val session = request.session
+        if (session == null) {
+            ThreadBinds.remove(Constant.RBAC_SESSION)
+        }
 
-        val value = session.getAttribute(Constant.RBAC_SESSION) ?: return true
+        val value = session.getAttribute(Constant.RBAC_SESSION)
+        if (value != null) {
+            ThreadBinds.put(Constant.RBAC_SESSION, value)
+        } else {
+            ThreadBinds.remove(Constant.RBAC_SESSION)
+        }
 
-        ThreadBinds.put(Constant.RBAC_SESSION, value)
         return true
     }
 

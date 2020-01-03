@@ -18,9 +18,9 @@ repositories {
 
 dependencies {
     api("org.springframework.boot:spring-boot-starter-web:2.2.2.RELEASE")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.1")
+    api("org.jetbrains.kotlin:kotlin-reflect")
+    api("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.2.2.RELEASE") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }

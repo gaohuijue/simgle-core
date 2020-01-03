@@ -1,5 +1,5 @@
 package com.simgle.core.rbac
 
 interface RbacSession {
-    fun getRbacUser(): RbacUser
+    var rbacUser: RbacUser
 }
